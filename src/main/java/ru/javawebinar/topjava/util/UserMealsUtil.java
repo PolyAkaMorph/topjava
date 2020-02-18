@@ -40,9 +40,8 @@ public class UserMealsUtil {
                 - Проверьте результат выполнения ДЗ (можно проверить логику в http://topjava.herokuapp.com , список еды)
                 - Оцените Time complexity алгоритма. Если она больше O(N), например O(N*N) или N*log(N), сделайте O(N). */
     public static List<UserMealWithExcess> filteredByCycles(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        List<UserMealWithExcess> userMealWithExcessList = new ArrayList<>();
-        Map<LocalDate, Integer> daysAndCalories = new HashMap<>();
         // collecting info about calories on each day
+        Map<LocalDate, Integer> daysAndCalories = new HashMap<>();
         for (UserMeal userMeal : meals) {
             if (daysAndCalories.containsKey(userMeal.getDateTime().toLocalDate())) {
                 daysAndCalories.computeIfPresent(userMeal.getDateTime().toLocalDate(), (key, value) -> value + userMeal.getCalories());
@@ -51,6 +50,7 @@ public class UserMealsUtil {
             }
         }
         // calculating excesses
+        List<UserMealWithExcess> userMealWithExcessList = new ArrayList<>();
         for (UserMeal userMeal : meals) {
             boolean excess = caloriesPerDay < daysAndCalories.get(userMeal.getDateTime().toLocalDate());
             if (TimeUtil.isBetweenInclusive(userMeal.getDateTime().toLocalTime(), startTime, endTime)) {
