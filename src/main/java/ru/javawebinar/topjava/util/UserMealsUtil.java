@@ -42,13 +42,13 @@ public class UserMealsUtil {
     public static List<UserMealWithExcess> filteredByCycles(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         // collecting info about calories on each day
         Map<LocalDate, Integer> daysAndCalories = new HashMap<>();
-        for (UserMeal userMeal : meals) {
-            if (daysAndCalories.containsKey(userMeal.getDateTime().toLocalDate())) {
-                daysAndCalories.computeIfPresent(userMeal.getDateTime().toLocalDate(), (key, value) -> value + userMeal.getCalories());
+        meals.forEach(meal -> {
+            if (daysAndCalories.containsKey(meal.getDateTime().toLocalDate())) {
+                daysAndCalories.computeIfPresent(meal.getDateTime().toLocalDate(), (key, value) -> value + meal.getCalories());
             } else {
-                daysAndCalories.putIfAbsent(userMeal.getDateTime().toLocalDate(), userMeal.getCalories());
+                daysAndCalories.putIfAbsent(meal.getDateTime().toLocalDate(), meal.getCalories());
             }
-        }
+        });
         // calculating excesses
         List<UserMealWithExcess> userMealWithExcessList = new ArrayList<>();
         for (UserMeal userMeal : meals) {
