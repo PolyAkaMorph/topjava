@@ -1,8 +1,27 @@
 package ru.javawebinar.topjava.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class MealTo {
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+    public String getFormattedDateTime() {
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(getDateTime());
+    }
+    public String getDescription() {
+        return description;
+    }
+
+    public int getCalories() {
+        return calories;
+    }
+
+    public boolean isExcess() {
+        return excess;
+    }
+
     private final LocalDateTime dateTime;
 
     private final String description;

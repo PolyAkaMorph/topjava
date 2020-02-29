@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava;
 
 import ru.javawebinar.topjava.model.Meal;
+import ru.javawebinar.topjava.util.MealsUtil;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,5 +15,6 @@ public class Main {
     public static void main(String[] args) {
         System.out.format("Hello TopJava Enterprise!");
         System.out.println("meow");
+        MealsUtil.getSomeMealsTo().forEach(mealTo -> System.out.println(mealTo));
     }
 }
