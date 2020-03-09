@@ -19,7 +19,7 @@ public class MealService {
     private final MealRepository repository;
 
 
-    public MealService(@Qualifier("InMemoryMealRepository") MealRepository repository) {
+    public MealService(@Qualifier("JdbcMealRepository") MealRepository repository) {
         this.repository = repository;
     }
 
